@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-sm-2">
+            <h2>Register</h2>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-sm-6">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="{{form.username.id_for_label}}">Username</label>
+                    <input type="text" class="form-control"
+                           placeholder="username" name="{{form.username.name}}" id="{{form.username.auto_id}}">
+                    {% if form.username.errors %}
+                        <ul>
+                            {% for error in form.username.errors %}
+                                <li class="text-danger">
+                                    {{error}}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="{{form.email.id_for_label}}">Email</label>
+                    <input type="email" class="form-control"
+                           placeholder="email" name="{{form.email.name}}" id="{{form.email.auto_id}}">
+                    {% if form.email.errors %}
+                        <ul>
+                            {% for error in form.email.errors %}
+                                <li class="text-danger">
+                                    {{error}}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="{{form.password1.id_for_label}}">Password</label>
+                    <input type="password" class="form-control"
+                           placeholder="password" name="{{form.password1.name}}" id="{{form.password1.auto_id}}">
+                    {% if form.password1.errors %}
+                        <ul>
+                            {% for error in form.password1.errors %}
+                                <li class="text-danger">
+                                    {{error}}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="{{form.password2.id_for_label}}">Repeat password</label>
+                    <input type="password" class="form-control"
+                           placeholder="repeat password" name="{{form.password2.name}}"
+                           id="{{form.password2.auto_id}}">
+                    {% if form.password2.errors %}
+                        <ul>
+                            {% for error in form.password2.errors %}
+                                <li class="text-danger">
+                                    {{error}}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <input type="submit" value="Save" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+{% endblock %}
