@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from .forms import RegisterForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
-from django.http import HttpResponse
+from django.contrib.auth.decorators import user_passes_test, login_required
 
 
+@user_passes_test(lambda u: not u.is_authenticated, login_url='/')
 def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
@@ -21,6 +22,7 @@ def register(request):
     return render(request, 'users/register.html', {'form': form})
 
 
+@user_passes_test(lambda u: not u.is_authenticated, login_url='/')
 def sign_in(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
@@ -38,6 +40,7 @@ def sign_in(request):
     return render(request, 'users/login.html', {'form': form})
 
 
+@login_required()
 def sign_out(request):
     logout(request)
     return redirect('login_page')
