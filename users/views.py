@@ -3,6 +3,7 @@ from .forms import RegisterForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import user_passes_test, login_required
+from django.contrib.auth.models import User
 
 
 @user_passes_test(lambda u: not u.is_authenticated, login_url='/')
@@ -44,3 +45,9 @@ def sign_in(request):
 def sign_out(request):
     logout(request)
     return redirect('login_page')
+
+
+@login_required()
+def account_details(request, username):
+    user = User.objects.get(username=username)
+    return render(request, 'users/account_details.html', {'user': user})
