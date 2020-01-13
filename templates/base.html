@@ -23,6 +23,9 @@
                             <a class="nav-link" href="/">Home</a>
                         </li>
                         {% if request.user.is_authenticated %}
+                            <li class="nav-item {% if request.path == '/articles' %}active{% endif %}">
+                                <a class="nav-link" href="/articles">Articles</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/logout">Logout</a>
                             </li>

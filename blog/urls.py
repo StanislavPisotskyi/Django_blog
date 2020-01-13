@@ -17,9 +17,12 @@ from django.contrib import admin
 from django.urls import path, re_path
 from app import views as app_views
 from users import views as user_views
+from article import views as article_views
 
 urlpatterns = [
     re_path(r'^account/(?P<username>[\w\d-]+)/details$', user_views.account_details, name='account_details_page'),
+    re_path(r'^articles/create$', article_views.create, name='create_article_page'),
+    re_path(r'^articles$', article_views.get_list, name='articles_list_page'),
     re_path(r'^$', app_views.index, name='index_page'),
     re_path(r'^register$', user_views.register, name='register_page'),
     re_path(r'^login', user_views.sign_in, name='login_page'),
