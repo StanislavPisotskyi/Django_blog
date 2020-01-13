@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row justify-content-end mt-4">
+        <div class="col-sm-2">
+            <a class="btn btn-primary" href="/articles">Back</a>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-4">
+        <div class="col-sm-10">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{article.title}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        Author:
+                        <a href="/account/{{article.author.username}}/details" target="_blank">
+                            {{article.author.username}}
+                        </a>
+                    </h6>
+                    <p class="card-text">{{article.description}}</p>
+                    <p class="mt-5">
+                        {% autoescape off %}
+                            {{article.content}}
+                        {% endautoescape %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
