@@ -12,10 +12,11 @@
                 <div class="card-body">
                     <h5 class="card-title">{{article.title}}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">
-                        Author:
+                        Created by
                         <a href="/account/{{article.author.username}}/details" target="_blank">
                             {{article.author.username}}
                         </a>
+                        at {{article.created_at}}
                     </h6>
                     <p class="card-text">{{article.description}}</p>
                     <p class="mt-5">

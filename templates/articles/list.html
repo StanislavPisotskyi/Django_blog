@@ -25,7 +25,15 @@
                         </p>
                         {% if request.user.id == article.author.id %}
                             <p>
-                                <a class="btn btn-warning" href="/articles/{{article.id}}/edit">Edit</a>
+                                <div class="actionElement">
+                                    <a class="btn btn-warning" href="/articles/{{article.id}}/edit">Edit</a>
+                                </div>
+                                <div class="actionElement">
+                                    <form action="/articles/{{article.id}}/delete" method="POST">
+                                        {% csrf_token %}
+                                        <input class="btn btn-danger" type="submit" value="Delete">
+                                    </form>
+                                </div>
                             </p>
                         {% endif %}
                     </div>

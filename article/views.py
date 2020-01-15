@@ -44,3 +44,11 @@ def edit(request, article_id):
     else:
         form = ArticleForm(instance=article)
     return render(request, 'articles/form.html', {'form': form})
+
+
+@login_required()
+def remove(request, article_id):
+    article = Article.objects.get(id=article_id)
+    if article.author.id == request.user.id and request.method == 'POST':
+        article.delete()
+    return redirect('articles_list_page')
