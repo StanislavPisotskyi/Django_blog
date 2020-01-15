@@ -23,9 +23,11 @@
                         <p>
                             <a href="/articles/{{article.id}}">Read more...</a>
                         </p>
-                        <p>
-                            <a class="btn btn-warning" href="/articles/{{article.id}}/edit">Edit</a>
-                        </p>
+                        {% if request.user.id == article.author.id %}
+                            <p>
+                                <a class="btn btn-warning" href="/articles/{{article.id}}/edit">Edit</a>
+                            </p>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}

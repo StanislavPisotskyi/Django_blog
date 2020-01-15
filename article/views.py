@@ -31,6 +31,8 @@ def get_one_by_id(request, article_id):
 @login_required()
 def edit(request, article_id):
     article = Article.objects.get(id=article_id)
+    if article.author.id != request.user.id:
+        return redirect('articles_list_page')
     if request.method == 'POST':
         form = ArticleForm(request.POST)
         if form.is_valid():
