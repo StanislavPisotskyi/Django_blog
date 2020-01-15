@@ -19,10 +19,26 @@ def create(request):
             return redirect('articles_list_page')
     else:
         form = ArticleForm()
-    return render(request, 'articles/create.html', {'form': form})
+    return render(request, 'articles/form.html', {'form': form})
 
 
 @login_required()
 def get_one_by_id(request, article_id):
     article = Article.objects.get(id=article_id)
     return render(request, 'articles/one.html', {'article': article})
+
+
+@login_required()
+def edit(request, article_id):
+    article = Article.objects.get(id=article_id)
+    if request.method == 'POST':
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            article.title = form.cleaned_data['title']
+            article.description = form.cleaned_data['description']
+            article.content = form.cleaned_data['content']
+            article.save()
+            return redirect('articles_list_page')
+    else:
+        form = ArticleForm(instance=article)
+    return render(request, 'articles/form.html', {'form': form})

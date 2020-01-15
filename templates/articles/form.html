@@ -13,7 +13,7 @@
                 <div class="form-group">
                     <label for="{{form.title.id_for_label}}">Title</label>
                     <input type="text" class="form-control"
-                           name="{{form.title.name}}" id="{{form.title.auto_id}}">
+                           name="{{form.title.name}}" id="{{form.title.auto_id}}" value="{{form.title.value}}">
                     {% if form.title.errors %}
                         <ul>
                             {% for error in form.title.errors %}
@@ -27,7 +27,8 @@
                 <div class="form-group">
                     <label for="{{form.description.id_for_label}}">Description</label>
                     <input type="text" class="form-control"
-                           name="{{form.description.name}}" id="{{form.description.auto_id}}">
+                           name="{{form.description.name}}" id="{{form.description.auto_id}}"
+                           value="{{form.description.value}}">
                     {% if form.description.errors %}
                         <ul>
                             {% for error in form.description.errors %}
@@ -41,7 +42,9 @@
                 <div class="form-group">
                     <label for="{{form.content.id_for_label}}">Content</label>
                     <textarea class="form-control"
-                              name="{{form.content.name}}" id="{{form.content.auto_id}}"></textarea>
+                              name="{{form.content.name}}" id="{{form.content.auto_id}}">
+                        {{form.content.value}}
+                    </textarea>
                     {% if form.content.errors %}
                         <ul>
                             {% for error in form.content.errors %}
