@@ -22,6 +22,7 @@ def create(request):
     return render(request, 'articles/create.html', {'form': form})
 
 
+@login_required()
 def get_one_by_id(request, article_id):
     article = Article.objects.get(id=article_id)
     return render(request, 'articles/one.html', {'article': article})
