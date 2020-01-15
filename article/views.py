@@ -4,6 +4,7 @@ from .forms import ArticleForm
 from .models import Article
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.exceptions import ObjectDoesNotExist
+from likes.models import Like
 
 
 @login_required()
@@ -35,7 +36,14 @@ def create(request):
 @login_required()
 def get_one_by_id(request, article_id):
     article = Article.objects.get(id=article_id)
-    return render(request, 'articles/one.html', {'article': article})
+    was_liked_by_user = False
+    try:
+        like = Like.objects.get(article=article_id, user=request.user.id)
+    except ObjectDoesNotExist:
+        like = None
+    if isinstance(like, Like):
+        was_liked_by_user = True
+    return render(request, 'articles/one.html', {'article': article, 'was_liked': was_liked_by_user})
 
 
 @login_required()

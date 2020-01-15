@@ -28,7 +28,11 @@
                         <form class="likeForm"
                                 action="/articles/{{article.id}}/users/{{request.user.id}}/like" method="POST">
                             {% csrf_token %}
-                            <input class="btn btn-success" type="submit" value="Like">
+                            {% if was_liked %}
+                                <input class="btn btn-danger" type="submit" value="Dislike">
+                            {% else %}
+                                <input class="btn btn-success" type="submit" value="Like">
+                            {% endif %}
                         </form>
                     </div>
                 </div>
