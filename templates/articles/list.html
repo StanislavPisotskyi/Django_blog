@@ -41,4 +41,10 @@
             {% endfor %}
         </div>
     </div>
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-sm-10">
+            {% include 'pagination.html' with data=articles url='/articles' %}
+        </div>
+    </div>
 {% endblock %}
