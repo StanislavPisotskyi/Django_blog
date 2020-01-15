@@ -2,11 +2,20 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import ArticleForm
 from .models import Article
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 @login_required()
 def get_list(request):
-    articles = Article.objects.all()
+    articles_list = Article.objects.all().order_by('-id')
+    page = request.GET.get('page', 1)
+    paginator = Paginator(articles_list, 5)
+    try:
+        articles = paginator.page(page)
+    except PageNotAnInteger:
+        articles = paginator.page(1)
+    except EmptyPage:
+        articles = paginator.page(paginator.num_pages)
     return render(request, 'articles/list.html', {'articles': articles})
 
 
