@@ -7,11 +7,11 @@ from django.core.exceptions import ObjectDoesNotExist
 
 
 @login_required()
-def toggle_like(request, article_id, user_id):
+def toggle_like(request, article_id):
     result = {'success': False, 'action': 'none'}
     if request.method == 'POST':
         try:
-            like_instance = Like.objects.get(article=article_id, user=user_id)
+            like_instance = Like.objects.get(article=article_id, user=request.user.id)
         except ObjectDoesNotExist:
             like_instance = None
         if isinstance(like_instance, Like):
@@ -20,7 +20,7 @@ def toggle_like(request, article_id, user_id):
         else:
             like = Like()
             like.article = Article.objects.get(id=article_id)
-            like.user = User.objects.get(id=user_id)
+            like.user = User.objects.get(id=request.user.id)
             like.save()
             result['action'] = 'like'
         result['success'] = True

@@ -21,12 +21,9 @@ from article import views as article_views
 from likes import views as likes_views
 
 urlpatterns = [
-    re_path(
-        r'^articles/(?P<article_id>\d+)/users/(?P<user_id>\d+)/like$',
-        likes_views.toggle_like,
-        name='like_article'
-    ),
+    re_path(r'^articles/(?P<article_id>\d+)/like$', likes_views.toggle_like, name='like_article'),
     re_path(r'^account/(?P<username>[\w\d-]+)/details$', user_views.account_details, name='account_details_page'),
+    re_path(r'^articles/(?P<article_id>\d+)/like$', likes_views.toggle_like, name='like_article'),
     re_path(r'^articles/(?P<article_id>\d+)/delete$', article_views.remove, name='article_delete_page'),
     re_path(r'^articles/(?P<article_id>\d+)/edit$', article_views.edit, name='article_edit_page'),
     re_path(r'^articles/(?P<article_id>\d+)$', article_views.get_one_by_id, name='article_one_page'),

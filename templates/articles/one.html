@@ -25,15 +25,18 @@
                         {% endautoescape %}
                     </p>
                     <div class="mt-4">
-                        <form class="likeForm"
-                                action="/articles/{{article.id}}/users/{{request.user.id}}/like" method="POST">
-                            {% csrf_token %}
-                            {% if was_liked %}
-                                <input class="btn btn-danger" type="submit" value="Dislike">
-                            {% else %}
-                                <input class="btn btn-success" type="submit" value="Like">
-                            {% endif %}
-                        </form>
+                        {% csrf_token %}
+                        {% if was_liked %}
+                            <button data-url="/articles/{{article.id}}/like" class="btn btn-danger likeBtn">
+                                <span class="likeAction">Dislike</span>
+                                <span class="likeCount"></span>
+                            </button>
+                        {% else %}
+                            <button data-url="/articles/{{article.id}}/like" class="btn btn-success likeBtn">
+                                <span class="likeAction">Like</span>
+                                <span class="likeCount"></span>
+                            </button>
+                        {% endif %}
                     </div>
                 </div>
             </div>

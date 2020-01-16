@@ -1,12 +1,13 @@
 $(document).ready(function() {
     $(document)
-        .on('submit', '.likeForm', function(e) {
+        .on('click', '.likeBtn', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            var form = $(this);
-            var url = form.attr('action');
-            var token = form.find('input[name=csrfmiddlewaretoken]').val();
-            var button = form.find('input[type=submit]')
+            var button = $(this);
+            var url = button.attr('data-url');
+            var token = button.prev().val();
+            var counter = button.find('.likeCount');
+            var likeAction = button.find('.likeAction');
 
             $.ajax({
                 method: 'POST',
@@ -18,9 +19,11 @@ $(document).ready(function() {
                 success: function(data) {
                     if(data.success) {
                         if(data.action === 'like') {
-                            button.removeClass('btn-success').addClass('btn-danger').val('Dislike');
+                            button.removeClass('btn-success').addClass('btn-danger');
+                            likeAction.text('Dislike');
                         } else {
-                            button.removeClass('btn-danger').addClass('btn-success').val('Like');
+                            button.removeClass('btn-danger').addClass('btn-success');
+                            likeAction.text('Like');
                         }
                     }
                     console.log(data);
