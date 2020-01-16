@@ -43,7 +43,9 @@ def get_one_by_id(request, article_id):
         like = None
     if isinstance(like, Like):
         was_liked_by_user = True
-    return render(request, 'articles/one.html', {'article': article, 'was_liked': was_liked_by_user})
+    likes_count = Like.objects.filter(article=article_id).count()
+    result = {'article': article, 'was_liked': was_liked_by_user, 'likes_count': likes_count}
+    return render(request, 'articles/one.html', result)
 
 
 @login_required()

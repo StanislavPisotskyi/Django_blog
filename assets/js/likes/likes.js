@@ -8,6 +8,7 @@ $(document).ready(function() {
             var token = button.prev().val();
             var counter = button.find('.likeCount');
             var likeAction = button.find('.likeAction');
+            var currentLikesCount = parseInt(counter.html());
 
             $.ajax({
                 method: 'POST',
@@ -21,9 +22,11 @@ $(document).ready(function() {
                         if(data.action === 'like') {
                             button.removeClass('btn-success').addClass('btn-danger');
                             likeAction.text('Dislike');
+                            counter.html(currentLikesCount + 1);
                         } else {
                             button.removeClass('btn-danger').addClass('btn-success');
                             likeAction.text('Like');
+                            counter.html(currentLikesCount - 1);
                         }
                     }
                     console.log(data);

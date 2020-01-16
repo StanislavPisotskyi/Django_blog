@@ -29,12 +29,12 @@
                         {% if was_liked %}
                             <button data-url="/articles/{{article.id}}/like" class="btn btn-danger likeBtn">
                                 <span class="likeAction">Dislike</span>
-                                <span class="likeCount"></span>
+                                <span class="likeCount">{{likes_count}}</span>
                             </button>
                         {% else %}
                             <button data-url="/articles/{{article.id}}/like" class="btn btn-success likeBtn">
                                 <span class="likeAction">Like</span>
-                                <span class="likeCount"></span>
+                                <span class="likeCount">{{likes_count}}</span>
                             </button>
                         {% endif %}
                     </div>
