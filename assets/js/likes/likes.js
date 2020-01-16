@@ -5,7 +5,7 @@ $(document).ready(function() {
             e.stopPropagation();
             var button = $(this);
             var url = button.attr('data-url');
-            var token = button.prev().val();
+            var token = $('input[name=csrfmiddlewaretoken]').val();
             var counter = button.find('.likeCount');
             var likeAction = button.find('.likeAction');
             var currentLikesCount = parseInt(counter.html());

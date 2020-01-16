@@ -19,10 +19,11 @@ from app import views as app_views
 from users import views as user_views
 from article import views as article_views
 from likes import views as likes_views
+from comments import views as comments_views
 
 urlpatterns = [
-    re_path(r'^articles/(?P<article_id>\d+)/like$', likes_views.toggle_like, name='like_article'),
     re_path(r'^account/(?P<username>[\w\d-]+)/details$', user_views.account_details, name='account_details_page'),
+    re_path(r'^articles/(?P<article_id>\d+)/comments$', comments_views.create_comment, name='create_comment'),
     re_path(r'^articles/(?P<article_id>\d+)/like$', likes_views.toggle_like, name='like_article'),
     re_path(r'^articles/(?P<article_id>\d+)/delete$', article_views.remove, name='article_delete_page'),
     re_path(r'^articles/(?P<article_id>\d+)/edit$', article_views.edit, name='article_edit_page'),

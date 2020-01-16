@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    {% csrf_token %}
     <div class="row justify-content-end mt-4">
         <div class="col-sm-2">
             <a class="btn btn-primary" href="/articles">Back</a>
@@ -25,7 +26,6 @@
                         {% endautoescape %}
                     </p>
                     <div class="mt-4">
-                        {% csrf_token %}
                         {% if was_liked %}
                             <button data-url="/articles/{{article.id}}/like" class="btn btn-danger likeBtn">
                                 <span class="likeAction">Dislike</span>
@@ -40,6 +40,49 @@
                     </div>
                 </div>
             </div>
+            <div class="mt-4">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createCommentModal">
+                    Create a comment
+                </button>
+
+                <div class="modal fade" id="createCommentModal" tabindex="-1"
+                     role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content createCommentFormWrapper">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Create a comment</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="POST" class="commentCreateForm"
+                                      action="/articles/{{article.id}}/comments">
+                                    <div class="form-group">
+                                        <label for="{{comments_form.content.id_for_label}}">Content</label>
+                                        <textarea class="form-control"
+                                                  name="{{comments_form.content.name}}"
+                                                  id="{{comments_form.content.auto_id}}">
+                                        </textarea>
+                                    </div>
+                                    <input type="submit" value="Save" class="btn btn-success">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+{% endblock %}
+
+{% block js %}
+    <script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( 'textarea' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
 {% endblock %}
