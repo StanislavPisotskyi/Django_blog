@@ -17,7 +17,10 @@ $(document).ready(function() {
                 request.setRequestHeader('X-CSRFToken', token);
             },
             success: function(data) {
-                console.log(data);
+                if(data.success) {
+                    $('#createCommentModal').find('.close').click();
+                    $('#commentsWrapper').empty().append(data.comments);
+                }
             },
             error: function(xhr, exception) {
                 console.error(xhr);

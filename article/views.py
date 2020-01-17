@@ -47,7 +47,7 @@ def get_one_by_id(request, article_id):
         was_liked_by_user = True
     likes_count = Like.objects.filter(article=article_id).count()
     comments_form = CommentForm()
-    comments = fetch_comments_by_article_id(request, article_id)
+    comments = fetch_comments_by_article_id(request, article_id, 1)
     result = {
         'article': article,
         'was_liked': was_liked_by_user,
