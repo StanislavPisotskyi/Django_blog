@@ -6,6 +6,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.exceptions import ObjectDoesNotExist
 from likes.models import Like
 from comments.forms import CommentForm
+from comments.services import fetch_comments_by_article_id
 
 
 @login_required()
@@ -46,11 +47,13 @@ def get_one_by_id(request, article_id):
         was_liked_by_user = True
     likes_count = Like.objects.filter(article=article_id).count()
     comments_form = CommentForm()
+    comments = fetch_comments_by_article_id(request, article_id)
     result = {
         'article': article,
         'was_liked': was_liked_by_user,
         'likes_count': likes_count,
-        'comments_form': comments_form
+        'comments_form': comments_form,
+        'comments': comments
     }
     return render(request, 'articles/one.html', result)
 

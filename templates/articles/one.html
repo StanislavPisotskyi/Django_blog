@@ -74,6 +74,10 @@
             </div>
         </div>
     </div>
+
+    <div id="commentsWrapper">
+        {% include 'comments/list.html' with comments=comments article_id=article.id %}
+    </div>
 {% endblock %}
 
 {% block js %}
